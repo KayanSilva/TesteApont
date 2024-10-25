@@ -1,0 +1,74 @@
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f0f0f0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    margin: 0;
+}
+
+h2 {
+    text-align: center;
+    color: #333;
+    margin-bottom: 20px;
+}
+
+/* #ponto-formulario {
+    background-color: white;
+    border-radius: 10px;
+    box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+    padding: 30px;
+    width: 320px;
+} */
+
+.label {
+    display: block;
+    margin-bottom: 5px; /* Espaço abaixo das labels */
+    color: #555;
+    font-weight: bold; /* Negrito para as labels */
+    font-size: 14px; /* Tamanho da fonte das labels */
+}
+
+.input {
+    width: 100%;
+    padding: 12px; /* Preenchimento interno */
+    margin-bottom: 20px; /* Espaçamento inferior */
+    border: 2px solid #ccc; /* Borda padrão mais espessa */
+    border-radius: 5px; /* Bordas arredondadas */
+    font-size: 16px; /* Tamanho da fonte */
+    transition: border-color 0.3s, box-shadow 0.3s; /* Transições suaves para borda e sombra */
+}
+
+.input:focus {
+    border-color: #28a745; /* Cor da borda quando focado */
+    box-shadow: 0 0 5px rgba(40, 167, 69, 0.5); /* Sombra leve ao foco */
+    outline: none; /* Remove a borda de foco padrão */
+}
+
+.button {
+    background-color: #28a745; /* Verde */
+    color: white;              /* Texto branco */
+    padding: 12px 20px;        /* Espaçamento interno superior/inferior e esquerdo/direito */
+    border: none;              /* Sem borda padrão */
+    border-radius: 5px;       /* Bordas arredondadas */
+    font-size: 16px;           /* Tamanho da fonte */
+    cursor: pointer;           /* Cursor de ponteiro quando passar o mouse */
+    transition: background-color 0.3s, transform 0.3s; /* Transições suaves */
+}
+
+.button:hover {
+    background-color: #218838; /* Cor ao passar o mouse (mais escuro) */
+    transform: translateY(-2px); /* Efeito de elevação ao passar o mouse */
+}
+
+.button:active {
+    background-color: #1e7e34; /* Cor quando pressionado (mais escuro) */
+    transform: translateY(0);   /* Retorna à posição original ao pressionar */
+}
+
+@media (min-width: 600px) {
+    form {
+        flex-direction: row;
+    }
+}
