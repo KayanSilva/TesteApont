@@ -1,0 +1,10 @@
+@MarcadorDePonto_HostAddress = http://localhost:5070
+
+POST {{MarcadorDePonto_HostAddress}}/pontos
+Accept: application/json
+Body:
+{
+  "data": "2021-01-01",
+  "entrada": "08:00:00",
+  "saida": "17:00:00"
+}

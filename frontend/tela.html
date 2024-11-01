@@ -1,31 +1,118 @@
 <!DOCTYPE html>
 <html lang="pt-BR">
-
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exemplo de CSS Interno</title>
-    <link rel="stylesheet" href="./style.css">
+    <title>Registro de Ponto</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f0f0f0;
+        }
+        .container {
+            background-color: white;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0,0,0,0.1);
+        }
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+        form {
+            display: flex;
+            flex-direction: column;
+        }
+        label {
+            margin-top: 10px;
+            color: #666;
+        }
+        input {
+            padding: 8px;
+            margin-top: 5px;
+            border: 1px solid #ddd;
+            border-radius: 4px;
+        }
+        button {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+    </style>
 </head>
-
 <body>
-    <div>
-        <h2>Registro de Ponto</h2>
-        <form id="ponto-formulario">
-            <div>
-                <label for="data">Data:</label>
-            <input type="date" id="data-entrada" required>
-
+    <div class="container">
+        <h1>Registro de Ponto</h1>
+        <form id="pontoForm">
+            <label for="data">Data:</label>
+            <input type="date" id="data" name="data" required>
+            
             <label for="entrada">Hora de Entrada:</label>
-            <input type="time" id="hora-entrada" required>
-
+            <input type="time" id="entrada" name="entrada" required>
+            
             <label for="saida">Hora de Saída:</label>
-            <input type="time" id="hora-saida" required>
-            </div>
-
-            <button class="button"  type="submit">Registrar</button>
+            <input type="time" id="saida" name="saida" required>
+            
+            <button type="submit">Registrar Ponto</button>
         </form>
+        <div id="mensagem"></div>
     </div>
-</body>
 
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const form = document.getElementById('pontoForm');
+            const mensagemDiv = document.getElementById('mensagem');
+
+            form.addEventListener('submit', function(e) {
+                e.preventDefault();
+
+                const data = document.getElementById('data').value;
+                const entrada = document.getElementById('entrada').value;
+                const saida = document.getElementById('saida').value;
+
+                const pontoData = {
+                    data: data,
+                    entrada: entrada,
+                    saida: saida
+                };
+
+                fetch('https://localhost:8080/pontos', {
+                    method: 'POST',
+                    headers: {
+                        'Content-Type': 'application/json',
+                    },
+                    body: JSON.stringify(pontoData)
+                })
+                .then(response => {
+                    if (!response.ok) {
+                        throw new Error('Erro na resposta da rede');
+                    }
+                    return response.json();
+                })
+                .then(data => {
+                    mensagemDiv.textContent = 'Ponto registrado com sucesso!';
+                    mensagemDiv.style.color = 'green';
+                    form.reset();
+                })
+                .catch((error) => {
+                    console.error('Erro:', error);
+                    mensagemDiv.textContent = 'Erro ao registrar o ponto. Tente novamente.';
+                    mensagemDiv.style.color = 'red';
+                });
+            });
+        });
+    </script>
+</body>
 </html>
